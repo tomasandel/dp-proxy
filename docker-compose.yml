@@ -1,0 +1,15 @@
+services:
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+      - ${LOG_LIST_PATH:?LOG_LIST_PATH is required}:/srv/log-list.json:ro
+    env_file: .env
+
+volumes:
+  caddy_data:
+  caddy_config:
